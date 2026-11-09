@@ -1,0 +1,119 @@
+[
+  {
+    "host": "Codex",
+    "version": "CLI 0.167.0-alpha.3.2 (desktop selected)",
+    "status": "configured",
+    "note": "插件已安装启用，已有首次信任记录。实际选择桌面随附0.167.0-alpha.3.2；SHEAR真实七项报告已完成。本轮仅做版本/参数和合成协议验证，完整新会话/恢复验收仍待补齐。",
+    "hook_trusted": true,
+    "hook_execution_verified": false,
+    "agent_check": {
+      "tool_count": 29,
+      "dispatch": "native_cli_or_host_tools",
+      "native_generation_verified": true,
+      "evidence": "evidence/native-agent-repair-completed.json",
+      "progress_protocol_verified": true,
+      "streaming_implemented": true,
+      "streaming_model_run_verified": false,
+      "report_correction_protocol_verified": true,
+      "report_correction_evidence": "evidence/all-agent-bridge-correction.json",
+      "cli_capabilities_verified": true,
+      "lead_catalogue_transport_verified": true,
+      "lead_catalogue_evidence": "evidence/lead-catalogue-four-adapters.json"
+    },
+    "evidence": [
+      "evidence/host-installation.json",
+      "adapters/evidence/codex-hook-discovery.json",
+      "adapters/evidence/codex-session-result.json",
+      "adapters/evidence/mcp-live-result.json",
+      "evidence/all-agent-bridge-correction.json"
+    ],
+    "checked_date": "2026-11-09"
+  },
+  {
+    "host": "Claude Code",
+    "version": "2.1.218",
+    "status": "configured",
+    "note": "插件已安装启用。此前实际生成失败，已修复bare模式丢失OAuth；本轮实读2.1.218版本及必要help参数，未检查当前登录或调用模型。成功生成与完整启动/恢复仍待验证。",
+    "agent_check": {
+      "tool_count": 29,
+      "dispatch": "native_cli_or_host_tools",
+      "native_auth_present": true,
+      "native_generation_verified": false,
+      "evidence": "evidence/claude-core-diagnostic.json",
+      "native_generation_attempted": true,
+      "progress_protocol_verified": true,
+      "streaming_implemented": true,
+      "streaming_model_run_verified": false,
+      "report_correction_protocol_verified": true,
+      "report_correction_evidence": "evidence/all-agent-bridge-correction.json",
+      "native_auth_checked_date": "2026-11-07",
+      "cli_capabilities_verified": true,
+      "lead_catalogue_transport_verified": true,
+      "lead_catalogue_evidence": "evidence/lead-catalogue-four-adapters.json"
+    },
+    "hook_execution_verified": false,
+    "evidence": [
+      "evidence/host-installation.json",
+      "adapters/evidence/catalog-validation.json",
+      "evidence/all-agent-bridge-correction.json"
+    ],
+    "checked_date": "2026-11-09"
+  },
+  {
+    "host": "pi",
+    "version": "1.4.0",
+    "status": "bridge_verified",
+    "note": "已安装全局扩展；本轮真实SDK 1.4.0 AgentSession触发session_start，加载29工具并通过原生工具查询正式服务状态和检查队列，零模型调用。交互CLI、模型生成及恢复仍待验收。",
+    "sdk_session_start_verified": true,
+    "interactive_cli_verified": false,
+    "agent_check": {
+      "tool_count": 29,
+      "dispatch": "host_tools",
+      "sdk_queue_call_verified": true,
+      "model_generation_verified": false,
+      "evidence": "adapters/evidence/pi-all-agent-compatibility-session.json",
+      "progress_protocol_verified": true,
+      "report_correction_protocol_verified": true,
+      "report_correction_evidence": "evidence/all-agent-bridge-correction.json",
+      "lead_catalogue_transport_verified": true,
+      "lead_catalogue_evidence": "evidence/lead-catalogue-four-adapters.json"
+    },
+    "evidence": [
+      "adapters/evidence/pi-session-result.json",
+      "evidence/host-installation.json",
+      "evidence/all-agent-bridge-correction.json"
+    ],
+    "checked_date": "2026-11-09"
+  },
+  {
+    "host": "DeepSeek Harness",
+    "version": null,
+    "status": "bridge_verified",
+    "note": "本轮固定版本真实Cordis/DSH SDK加载29工具，通过启动、状态/分页/检查队列、参数拒绝与卸载，零模型调用。prepared-v12/deepseek可用；完整宿主仍缺失，未修改全局profile或安装启用插件。",
+    "agent_check": {
+      "tool_count": 29,
+      "dispatch": "host_tools",
+      "sdk_queue_call_verified": true,
+      "model_generation_verified": false,
+      "evidence": "adapters/evidence/dsh-all-agent-compatibility-sdk.json",
+      "progress_protocol_verified": true,
+      "report_correction_protocol_verified": true,
+      "report_correction_evidence": "evidence/all-agent-bridge-correction.json",
+      "lead_catalogue_transport_verified": true,
+      "lead_catalogue_evidence": "evidence/lead-catalogue-four-adapters.json"
+    },
+    "sdk_versions": {
+      "@deepseek-ai/cordis": "4.1.0",
+      "@deepseek-ai/dsh-tools": "0.0.1-rc.1"
+    },
+    "sdk_verified": true,
+    "runtime_verified": false,
+    "evidence": [
+      "adapters/evidence/dsh-sdk-result.json",
+      "adapters/evidence/dsh-source-review.json",
+      "adapters/HOST_AUDIT.md",
+      "evidence/all-agent-bridge-correction.json"
+    ],
+    "checked_date": "2026-11-09"
+  }
+]

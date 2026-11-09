@@ -1,0 +1,7 @@
+test_report_updates_facts_and_creates_eligible_plan_without_authorizing (test_workflows.WorkflowTests.test_report_updates_facts_and_creates_eligible_plan_without_authorizing) ... ok
+test_unknown_does_not_erase_known_and_conflicting_evidence_blocks_invitation (test_workflows.WorkflowTests.test_unknown_does_not_erase_known_and_conflicting_evidence_blocks_invitation) ... ok
+
+----------------------------------------------------------------------
+Ran 258 tests in 126.582s
+
+OK (skipped=1)

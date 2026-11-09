@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#181c1b">
+  <title>Prospect · 项目观察台</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/launch-watch.css">
+  <link rel="stylesheet" href="/leads.css">
+  <script src="/app.js" defer></script>
+  <script src="/leads.js" defer></script>
+  <script src="/executions.js" defer></script>
+  <script src="/participation.js" defer></script>
+  <script src="/mining.js" defer></script>
+  <script src="/launch-watch.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至主要内容</a>
+  <aside class="sidebar" aria-label="主导航">
+    <a class="brand" href="#overview" aria-label="Prospect 首页"><span class="brand-mark" aria-hidden="true">p</span><span>prospect<span class="brand-caption">项目观察台</span></span></a>
+    <div class="workspace"><span class="status-dot" aria-hidden="true"></span><span>本地工作区</span><span class="local-tag">LOCAL</span></div>
+    <nav id="navigation">
+      <a href="#overview" data-view="overview" aria-current="page"><span class="nav-symbol" aria-hidden="true">◫</span>总览</a>
+      <a href="#todo" data-view="todo"><span class="nav-symbol" aria-hidden="true">☆</span>开挖待办<span class="nav-count" id="nav-watch-count"></span></a>
+      <a href="#requests" data-view="requests"><span class="nav-symbol" aria-hidden="true">↗</span>开始参与<span class="nav-count request-count" id="nav-request-count"></span></a>
+      <a href="#opportunities" data-view="opportunities"><span class="nav-symbol" aria-hidden="true">⌕</span>全部线索<span class="nav-count" id="nav-count"></span></a>
+      <a href="#runs" data-view="runs"><span class="nav-symbol" aria-hidden="true">≡</span>运行中心</a>
+      <a href="#evidence" data-view="evidence"><span class="nav-symbol" aria-hidden="true">▤</span>来源与证据</a>
+      <a href="#settings" data-view="settings"><span class="nav-symbol" aria-hidden="true">⊙</span>档案与设置</a>
+      <a href="#agents" data-view="agents"><span class="nav-symbol" aria-hidden="true">◎</span>Agent 与模型</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="sidebar-label">你的项目研究工作台</div><p>发现 → 核验 → 提请参与<br>由你决定是否进入参与计划</p><div class="sidebar-version" id="sidebar-version">Prospect / 本地服务</div></div>
+  </aside>
+
+  <div class="app-shell">
+    <header class="topbar"><div class="breadcrumb">工作区 <span aria-hidden="true">/</span> <strong id="breadcrumb">总览</strong></div><div class="topbar-actions"><button class="text-button guide-launch" id="guide-launch" type="button" aria-haspopup="dialog" aria-controls="guide-dialog">使用指南<span class="guide-state" id="guide-launch-state" hidden></span></button><div class="connection"><span id="connection-dot" class="status-dot pending" aria-hidden="true"></span><span id="connection-label" role="status">正在连接本地服务</span><button class="icon-button" id="refresh-button" type="button" aria-label="刷新数据" title="刷新数据">↻</button></div></div></header>
+    <div id="connection-banner" class="connection-banner" role="alert" hidden><span id="connection-message"></span><button type="button" id="retry-button" class="text-button">重试连接</button></div>
+    <div id="check-shortcut" class="check-shortcut" hidden></div>
+    <main id="main" tabindex="-1">
+      <div class="page-heading"><div><p class="eyebrow" id="page-eyebrow">WORKSPACE OVERVIEW</p><h1 id="page-title">总览</h1><p class="page-description" id="page-description">观察项目进展，核对证据，再决定下一步。</p></div><div class="page-primary-actions"><a class="button primary" id="start-project-global" href="#requests" data-start-participation>＋ 开始一个项目</a><button class="text-button" type="button" id="scan-button" disabled><span aria-hidden="true">↻</span> 扫描公开来源</button></div></div>
+
+      <section id="guide-welcome" class="guide-welcome" aria-labelledby="guide-welcome-title" hidden><div class="guide-welcome-copy"><p class="eyebrow">欢迎来到 Prospect</p><h2 id="guide-welcome-title">花一分钟了解怎么用</h2><p>从看懂线索，到收到参与请求，四小步熟悉这张工作台。也可以先逛逛，使用指南一直在右上角。</p></div><div class="guide-actions"><button class="button primary" id="guide-start" type="button" aria-haspopup="dialog" aria-controls="guide-dialog">带我看看</button><button class="button secondary" id="guide-skip" type="button">先自己看看</button></div></section>
+
+      <section id="view-overview" class="view" aria-label="总览">
+        <div id="watch-overview" class="watch-entry" hidden></div>
+        <section class="participation-focus" aria-labelledby="request-overview-title"><div class="panel-heading"><h2 id="request-overview-title">参与与运行</h2><a href="#requests" class="text-link">待决定的计划 <span id="request-overview-count">0</span> ↗</a></div><div class="participation-start"><h3>选项目 → Agent 检查 → 启动运行</h3><p>从一个入口继续。能启动时设置运行范围，暂不能启动时会告诉你具体缺什么。</p><div class="detail-actions"><a class="button primary" href="#requests" data-start-participation>开始一个项目</a><a class="text-link" href="#runs">查看运行记录 ↗</a></div></div><div id="participation-overview"><div class="loading-line"></div><p class="quiet-note">正在读取参与请求</p></div></section>
+        <div class="metric-grid" aria-label="观察指标">
+          <div class="metric"><span class="metric-label">发现的线索</span><strong id="metric-candidates" class="loading-value">···</strong><span class="metric-note" id="metric-candidates-note">等待本地数据</span></div>
+          <div class="metric"><span class="metric-label">已启用来源</span><strong id="metric-sources" class="loading-value">···</strong><span class="metric-note" id="metric-sources-note">读取公开来源</span></div>
+          <div class="metric"><span class="metric-label">观察周期</span><strong id="metric-cycles" class="loading-value">···</strong><span class="metric-note" id="metric-cycles-note">真实运行累计</span></div>
+          <div class="metric"><span class="metric-label">主动 Agent 检查</span><strong id="metric-usage" class="loading-value">···</strong><span class="metric-note" id="metric-usage-note">等待用量信息</span></div>
+        </div>
+
+        <section class="panel recent-panel" aria-labelledby="recent-title"><div class="panel-heading"><div><h2 id="recent-title">最近发现</h2><p class="section-copy">保留不确定性，先看项目证据。</p></div><a href="#opportunities" class="text-link">查看全部 <span aria-hidden="true">↗</span></a></div><div id="recent-candidates" class="table-host"><div class="empty-state loading-state"><div class="loading-line"></div><p>正在读取候选项目</p></div></div></section>
+
+        <div class="overview-grid">
+          <section class="panel observation-panel" aria-labelledby="observation-title"><div class="panel-heading"><h2 id="observation-title">七日观察</h2><span id="observation-badge" class="badge">读取中</span></div><p class="section-copy">按来源频率收集变化，记录覆盖率与失败原因。</p><div class="observation-number"><strong id="observation-hours">···</strong><span>/ <span id="observation-target">168</span> 小时</span></div><progress id="observation-progress" max="168" value="0" aria-label="七日观察时间进度"></progress><div class="observation-meta"><span id="observation-start">尚未读取观察状态</span><span id="observation-coverage">覆盖率待确认</span></div><div class="panel-actions"><button id="observation-button" type="button" class="button secondary" disabled>开始观察</button><span class="quiet-note">仅监测公开来源，不运行挖矿</span></div></section>
+          <section class="panel machine-panel" aria-labelledby="machine-title"><div class="panel-heading"><h2 id="machine-title">这台设备</h2><a href="#settings" class="text-link">查看档案 <span aria-hidden="true">↗</span></a></div><div class="machine-name" id="machine-name">正在读取设备信息</div><dl id="machine-summary" class="compact-definition"></dl><p class="machine-footnote">匹配结果取决于项目要求与当前可用资源。</p></section>
+        </div>
+
+        <div class="context-note"><span class="note-mark" aria-hidden="true">i</span><p>“未开盘”需要独立证据。未查到交易信息、积分或测试币，都不等于可兑现收益。</p></div>
+      </section>
+
+      <section id="view-requests" class="view" aria-label="开始参与" hidden>
+        <div id="watch-start" class="watch-entry" hidden></div>
+        <section class="mining-desk" aria-labelledby="mining-title">
+          <div class="mining-intro"><p class="eyebrow">真实挖矿 · 币安 Agent 钱包</p><h2 id="mining-title">从这里，跑完第一轮。</h2><p>CPU 提供算力，矿池换算为 USDT，通过 BSC 结算到你的钱包。</p></div>
+          <div class="mining-route-line"><span class="badge teal">CPU 优先 · 独立虚拟机 · 2 线程</span><span id="mining-market">正在读取交易通道</span><span id="mining-wallet-status">正在读取钱包</span></div>
+          <p id="mining-progress" class="mining-progress" role="status" aria-live="polite">读取真实运行状态…</p>
+          <ol class="mining-milestones" aria-label="挖矿进度"><li id="mining-step-prepare">1 · 准备</li><li id="mining-step-run">2 · 提供算力</li><li id="mining-step-credit">3 · 矿池记账</li><li id="mining-step-paid">4 · 钱包到账</li></ol>
+          <dl class="mining-metrics"><div><dt>矿池接受份额</dt><dd id="mining-shares">—</dd></div><div><dt id="mining-hashrate-label">本轮算力</dt><dd id="mining-hashrate">—</dd></div><div><dt>矿池累计 USDT</dt><dd id="mining-balance">—</dd></div><div><dt>钱包到账</dt><dd id="mining-paid">尚未核验</dd></div></dl>
+          <div class="mining-actions"><button id="mining-primary" class="button primary" type="button">准备真实挖矿</button><button id="mining-new-run" class="button secondary" type="button" hidden>再运行一轮</button><button id="mining-stop" class="button secondary" type="button" hidden>停止本轮</button><button id="mining-refresh" class="text-button" type="button">重新核对钱包与通道</button><a href="#runs" class="text-link">运行日志与回执 ↗</a></div>
+          <p id="mining-yield-note" class="quiet-note mining-yield-note" hidden></p><section id="mining-login-block" class="mining-login" hidden><p id="mining-login-message" role="status"></p><strong id="mining-pairing-code" class="mining-pairing-code"></strong><a id="mining-login-url" class="button secondary" target="_blank" rel="noopener noreferrer" hidden>打开币安官方二维码 ↗</a><p class="quiet-note">请用币安 App 核对配对码并确认登录。这里仅连接钱包，不发起资产交易。</p></section><p id="mining-threshold" class="quiet-note">达到矿池付款门槛后才会结算；接受算力不等于已经到账。</p>
+          <details class="mining-details"><summary>收款、费用与运行说明</summary><button id="mining-connect" class="button secondary" type="button" hidden>连接币安 Agent 钱包</button><p id="mining-address" class="mining-address">钱包地址由币安 Agent 钱包读取，无需手填。</p><p>矿池平台费约 1%，XMRig 开发者捐赠 1%；电费另外计算，不保证盈利。USDT 本身不是 PoW 币，这里由矿池换算收益。</p><p>本轮最多 15 分钟，CPU 上限 20%，内存最多 3 GB，不启用 GPU。你在电脑前也可以观察运行，随时停止。</p><p>只提取已校验的官方矿工，不安装驱动或要求管理员权限。矿池使用自签名 SSL 证书，本次固定首次连接的指纹；资源限制并不隔离文件和网络。</p><a href="https://unmineable.com/coins/USDT" target="_blank" rel="noopener noreferrer">查看矿池官方结算说明 ↗</a></details>
+        </section>
+        <details class="research-archive"><summary>其他检查方式与历史研究</summary>
+        <section class="start-panel" id="participation-start-panel" aria-labelledby="start-title">
+          <div class="start-heading"><p class="eyebrow">从这里开始</p><h2 id="start-title">设备方向与运行准备</h2><p id="start-software-status">先看 CPU / GPU 方向，再看运行准备到哪一步。</p></div>
+          <ol class="start-steps sr-only" id="start-steps" aria-label="当前参与步骤"><li class="current"><span class="step-number">1</span>选择项目</li><li><span class="step-number">2</span>Agent 检查</li><li><span class="step-number">3</span>启动运行</li></ol>
+          <div class="start-fields"><label for="start-project">已接入或当前选中的项目<select id="start-project" aria-label="选择项目"><option value="">正在读取项目…</option></select></label><div class="start-auto-agent"><span>检查 Agent · 自动识别</span><strong id="start-agent-detected" role="status">正在识别…</strong></div></div>
+          <p class="project-browse-note"><a href="#opportunities" class="text-link">浏览全部线索 ↗</a></p>
+          <div class="start-agent-help"><p id="start-agent-note" class="quiet-note">根据正在使用的 Agent 自动选择。</p></div>
+
+          <div class="start-status" id="start-status" aria-live="polite"><h3>先选一个想参与的项目</h3></div>
+          <div class="start-actions" id="start-actions"></div><p id="start-error" class="inline-error" role="alert" hidden></p>
+          <p class="start-availability sr-only" id="start-availability"></p>
+          <details class="start-agent-options" id="start-agent-options"><summary>其他检查方式</summary><div class="start-agent-options-body"><label for="start-agent">临时改用<select id="start-agent" aria-label="临时检查方式"><option value="current">自动识别当前 Agent</option></select></label><a href="#agents" class="text-link">模型与接口设置 ↗</a></div></details>
+        </section>
+        </details>
+        <details class="research-archive" id="research-archive"><summary>历史检查与详细研究资料</summary>
+        <section class="check-center" aria-labelledby="check-center-title"><div class="panel-heading"><div><h2 id="check-center-title">我的 Agent 检查</h2><p class="section-copy">正在处理的项目和最近结果都在这里，离开详情也能继续跟进。</p></div></div><div id="check-center-list"></div></section>
+        <section class="trial-section" aria-labelledby="trial-title"><div class="panel-heading"><div><h2 id="trial-title">建议尝试</h2><p class="section-copy">安全检查通过后进入这里。硬件仅作参考，费用与维护安排单独列出。</p></div><span class="badge">安全优先 · 硬件暂不筛除</span></div><div id="trial-list"></div></section>
+        <details class="flow-help"><summary>第一次使用？查看参与流程</summary>
+        <div class="notice-strip request-policy"><span class="badge">当前支持参与准备</span><p>先选项目、检查条件，核验后审阅一次运行的具体范围。</p></div>
+        <ol class="participation-roadmap" aria-label="参与流程">
+          <li><span class="step-index">01</span><h3>选择项目，检查条件</h3><p>在本页选择项目，点击“让 Agent 检查这个项目”。Agent 会核验来源和参与条件，不启动项目。</p><a class="button primary" href="#requests" data-start-participation>选择项目并检查条件</a></li>
+          <li><span class="step-index">02</span><h3>让 Agent 检查，审阅方案</h3><p>Agent 报告会形成准备方案；身份一致且有引用的事实进入项目资料。符合条件时系统会提请参与，资料不足时列出缺项与下一步。</p><span class="badge">检查完成 ≠ 已启动</span></li>
+          <li><span class="step-index">03</span><h3>真实参与与每日运行</h3><p>从支持的项目准备方案进入试运行，在运行中心查看日志和回执。每日自动运行尚未开放。</p><a class="button secondary" href="#runs">打开运行中心</a></li>
+        </ol>
+        </details>
+        <h2>已核验的参与计划</h2>
+        <div class="results-heading"><span id="participation-count">正在读取请求</span><span>同一项目的相同证据不会反复打扰</span></div>
+        <div id="participation-list"></div>
+        <section class="panel preparation-section" aria-labelledby="preparation-title"><div class="panel-heading"><div><h2 id="preparation-title">检查后的准备方案</h2><p class="section-copy">每份报告都有下一步：查看已核验事实、缺项和固定版本配方。安全核验、尝试建议与运行准备分别呈现。</p></div></div><div id="preparation-list"></div></section>
+        </details>
+      </section>
+
+      <section id="view-todo" class="view" aria-label="开挖待办" hidden>
+        <section class="watch-policy"><span class="watch-star" aria-hidden="true">☆</span><div><h2>在开挖前，先把机会留住。</h2><p>已公布挖掘消息、尚未开放主网挖掘。CPU 优先，GPU 其次；支持原生钱包和币安兼容路线。</p></div></section>
+        <div class="watch-toolbar"><p id="watch-scan-state" role="status">正在读取公告巡检状态</p><div><label class="sr-only" for="watch-filter">待办状态</label><select id="watch-filter"><option value="active">待办与跟进中</option><option value="all">全部记录</option><option value="done">已处理</option></select><button class="button secondary" type="button" id="watch-scan">寻找开挖预告</button></div></div>
+        <div id="watch-list" class="watch-list"></div>
+      </section>
+
+      <section id="view-opportunities" class="view" aria-label="全部线索" hidden>
+        <div class="lead-intro"><div class="lead-intro-top"><h2 id="lead-total">全部项目线索</h2><a href="#todo" class="text-link" id="lead-priority">查看重点待办 ↗</a></div><p>旧线索都保留在这里。尚未核实、没有价格或钱包信息，不代表不值得参与。</p><p id="lead-summary" role="status">正在读取各阶段数量</p></div>
+        <div class="filter-bar lead-filters"><label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">搜索项目名称或摘要</span><input id="candidate-search" type="search" placeholder="搜索项目名称、摘要…" autocomplete="off"></label><label class="filter-label"><span class="sr-only">项目类型</span><select id="category-filter"><option value="all">全部类型</option><option value="pow">传统挖矿</option><option value="node">节点 / 算力贡献</option><option value="tasks">测试网 / 空投任务</option></select></label><label class="filter-label"><span class="sr-only">设备方向</span><select id="compute-filter" aria-label="设备方向"><option value="all">全部设备</option><option value="cpu">CPU 方向</option><option value="gpu">GPU 方向</option><option value="none">网页 / 轻量任务</option><option value="unknown">设备待确认</option></select></label><label class="filter-label"><span class="sr-only">发现阶段</span><select id="participation-filter" aria-label="发现阶段"><option value="all">全部阶段</option><option value="unverified">待核实</option><option value="upcoming">待开挖</option><option value="open">已开放</option><option value="excluded">有依据排除</option></select></label></div>
+        <div class="results-heading"><span id="results-count">正在读取项目</span><button type="button" class="text-link" id="lead-clear">清除筛选</button></div>
+        <div id="lead-error" class="lead-error" role="status" hidden><span id="lead-error-message"></span><button type="button" class="button secondary" id="lead-retry">重试</button></div>
+        <p id="lead-loading" class="lead-loading" role="status"></p>
+        <div class="panel table-panel" id="candidate-list"><div class="empty-state loading-state"><div class="loading-line"></div><p>正在读取候选项目</p></div></div>
+        <div id="lead-pagination" class="lead-pagination" aria-label="线索分页" hidden></div>
+      </section>
+
+      <section id="view-runs" class="view" aria-label="运行记录" hidden>
+        <section class="execution-workspace" aria-labelledby="execution-heading"><div class="panel-heading"><div><h2 id="execution-heading">项目运行记录</h2><p id="execution-summary" class="section-copy">真正启动后的项目，进度和结果都会显示在这里。</p></div></div>
+          <div id="execution-list" class="execution-list"></div><details class="diagnostic-tools" id="diagnostic-tools"><summary>体验与排查 · 不会挖矿</summary><p class="quiet-note">本机自检约12秒，体验日志和停止功能，不参与任何项目。</p><button class="button secondary" type="button" id="execution-self-check">体验运行流程（自检）</button><div id="diagnostic-list" class="execution-list"></div></details>
+          <section id="execution-detail" class="execution-detail" hidden><div class="record-heading"><h3 id="execution-title"></h3><span class="badge" id="execution-status"></span></div><div id="execution-stages" class="execution-stages" aria-label="运行阶段"></div><p id="execution-message" role="status"></p><p id="execution-time" class="quiet-note"></p><div class="execution-log-heading"><span id="execution-connection" class="muted">正在连接日志</span><span id="execution-heartbeat" class="muted"></span></div><p id="execution-log-empty" class="quiet-note">等待第一条运行日志…</p><pre id="execution-log" class="execution-log" aria-label="任务实时日志" tabindex="0"></pre><p id="execution-result" class="quiet-note"></p><div class="detail-actions"><button type="button" class="button secondary" id="execution-stop">停止本次运行</button><button type="button" class="button secondary" id="execution-receipt" hidden>下载运行回执</button></div></section>
+        </section>
+        <section class="panel"><div class="panel-heading"><h2>公开来源采集</h2><span class="muted">实际发生的只读扫描</span></div><div id="scan-list"><div class="empty-state"><p>正在读取扫描历史</p></div></div></section>
+        <section class="panel section-gap"><div class="panel-heading"><div><h2>参与条件预检</h2><span id="run-count" class="muted"></span></div><label class="validation-toggle"><input id="show-validation-runs" type="checkbox">显示开发验证记录</label></div><p id="validation-runs-note" class="quiet-note record-explanation"></p><div id="run-list"><div class="empty-state"><p>正在读取预检记录</p></div></div></section>
+      </section>
+
+      <section id="view-evidence" class="view" aria-label="来源与证据" hidden>
+        <section class="panel"><div class="panel-heading"><div><h2>公开来源</h2><p class="section-copy">每个来源独立记录连接状态、采集频率与最近成功时间。</p></div></div><div id="source-list"><div class="empty-state"><p>正在读取来源配置</p></div></div></section>
+        <section class="panel section-gap"><div class="panel-heading"><h2>证据与事件</h2><span class="muted">原始字段可展开核对</span></div><div id="event-list"><div class="empty-state"><p>正在读取事件</p></div></div></section>
+      </section>
+
+      <section id="view-settings" class="view" aria-label="档案与设置" hidden>
+        <section class="panel preferences-panel" aria-labelledby="preferences-title"><div class="panel-heading"><div><h2 id="preferences-title">已采用的运行策略</h2><p class="section-copy">这些偏好用于后续参与计划，不代表真实任务已经开启。</p></div></div><dl id="runtime-preferences" class="runtime-preferences"></dl><p class="quiet-note" id="resource-enforcement">正在读取资源策略状态。</p></section>
+        <div class="settings-grid"><section class="panel"><div class="panel-heading"><div><h2>参与偏好</h2><p class="section-copy">用于适配评估，保存不会触发挖矿或资金操作。</p></div></div><form id="profile-form"><div class="form-grid"><label>电价 <span class="field-unit">元 / kWh</span><input name="electricity_price" type="number" min="0" step="0.01" inputmode="decimal"></label><label>每日运行时长 <span class="field-unit">小时</span><input name="daily_hours" type="number" min="0" max="24" step="0.5" inputmode="decimal"></label><label>CPU 使用上限 <span class="field-unit">%</span><input name="cpu_limit_pct" type="number" min="0" max="100" step="1" inputmode="numeric"></label><label>每日成本上限 <span class="field-unit">元</span><input name="max_daily_cost" type="number" min="0" step="0.1" inputmode="decimal"></label><label>可投入维护时间 <span class="field-unit">分钟 / 日</span><input name="available_minutes" type="number" min="0" max="1440" step="1" inputmode="numeric"></label><label>操作经验<select name="skill_level"><option value="" disabled>尚未设置</option><option value="beginner">入门</option><option value="intermediate">熟悉命令行</option><option value="advanced">能够维护节点与排障</option></select></label></div><label class="checkbox-field"><input type="checkbox" name="gpu_allowed"><span>允许在评估中考虑 GPU 任务<span class="field-help">实际运行仍需项目授权</span></span></label><div class="form-footer"><button class="button primary" id="save-profile-button" type="submit" disabled>保存偏好</button><span id="profile-message" class="form-message" role="status"></span></div></form></section><div class="settings-side"><section class="panel"><div class="panel-heading"><h2>设备信息</h2></div><dl id="hardware-details" class="detail-definition"></dl><p class="quiet-note">设备探测数据来自本地服务。</p></section><section class="panel section-gap"><div class="panel-heading"><h2>用量口径</h2></div><div id="usage-details"></div></section></div></div>
+        <section class="panel section-gap"><div class="panel-heading"><div><h2>Agent 接入状态</h2><p class="section-copy">配置存在、接口实现与真实宿主验证分别呈现。</p></div></div><div id="host-list"></div></section>
+      </section>
+
+      <section id="view-agents" class="view" aria-label="Agent 与模型" hidden>
+        <div class="model-intro"><div><p>检查可通过本机 Agent 或独立模型 API 运行。这里管理 Prospect 新发起的检查，不改变你正在使用的聊天。</p></div><span class="badge">保存后，下次检查生效</span></div>
+        <section id="deepseek-api-settings" class="panel deepseek-settings" aria-label="DeepSeek API 接口"></section>
+        <div id="agent-model-settings"></div>
+        <section class="panel section-gap"><div class="panel-heading"><div><h2>最近任务实际使用记录</h2><p class="section-copy">请求的配置与宿主回报分别显示；历史任务没有记录的值保持未知。</p></div></div><div id="agent-model-history"></div></section>
+      </section>
+      <footer class="page-footer"><span>Prospect · 证据驱动的项目观察</span><span id="last-updated">等待首次同步</span></footer>
+    </main>
+  </div>
+
+  <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title" aria-describedby="guide-description"><div class="dialog-frame"><header class="dialog-header"><div><p class="eyebrow">一起熟悉工作台</p><h2 id="guide-title" tabindex="-1">先从项目线索开始</h2></div><button class="icon-button close-button" id="guide-close" type="button" aria-label="关闭使用指南">×</button></header><div class="guide-body" id="guide-body"><ol class="guide-progress" id="guide-progress" aria-label="使用指南进度"></ol><p id="guide-description"></p><p id="guide-detail"></p><div class="guide-callout"><p id="guide-callout"></p></div><div class="guide-actions"><button class="button secondary" id="guide-page" type="button">看看项目线索</button><span class="quiet-note" id="guide-page-note">只查看页面，回来可以接着读。</span></div></div><footer class="guide-footer"><span class="guide-state" id="guide-step-count" aria-live="polite">第 1 步，共 4 步</span><div class="guide-footer-buttons"><button class="button secondary" id="guide-prev" type="button">上一步</button><button class="button primary" id="guide-next" type="button">下一步</button></div></footer></div></dialog>
+  <dialog id="candidate-dialog" class="detail-dialog" aria-labelledby="detail-title"><div class="dialog-frame"><header class="dialog-header"><div><p class="eyebrow">PROJECT BRIEF</p><h2 id="detail-title">项目详情</h2></div><button class="icon-button close-button" id="close-detail" type="button" aria-label="关闭项目详情">×</button></header><div id="candidate-detail" class="dialog-body"></div></div></dialog>
+  <dialog id="participation-dialog" class="detail-dialog" aria-labelledby="participation-title"><div class="dialog-frame"><header class="dialog-header"><div><p class="eyebrow" id="participation-eyebrow">PARTICIPATION REQUEST</p><h2 id="participation-title">参与计划</h2></div><button class="icon-button close-button" id="close-participation" type="button" aria-label="关闭参与计划">×</button></header><div id="participation-detail" class="dialog-body"></div></div></dialog>
+  <dialog id="observation-dialog" class="confirm-dialog" aria-labelledby="confirm-title"><form method="dialog"><div class="confirm-content"><span class="badge teal">七日观察</span><h2 id="confirm-title">开始持续观察？</h2><p id="confirm-description">本地服务将在接下来 7 天按配置频率读取已启用的公开来源，累计真实时长与覆盖率。</p><p>这不会安装矿工、运行挖矿、签名或支付，也不会调用后台模型。电脑与本地服务需要保持运行；你可以随时暂停。</p></div><div class="confirm-actions"><button class="button secondary" value="cancel">暂不开始</button><button class="button primary" id="confirm-observation" value="confirm">开始观察</button></div></form></dialog>
+  <dialog id="execution-dialog" class="execution-dialog" aria-labelledby="execution-scope-title"><div class="dialog-frame"><header class="dialog-header"><div><p class="eyebrow">本次运行范围</p><h2 id="execution-scope-title">开始一次运行</h2></div><button class="icon-button close-button" id="execution-close" type="button" aria-label="关闭运行方案">×</button></header><form id="execution-form" class="execution-form"><label>执行路线<select id="execution-driver"></select></label><p id="execution-defaults" class="execution-defaults"></p><div id="execution-project-options"><p id="execution-options-help" class="quiet-note">先选节点试运行即可，不需要钱包或签名。资源已填推荐值。</p><details id="execution-resource-options"><summary>调整时长和资源（可选）</summary><div class="execution-fields"><label>时长（秒）<input id="execution-duration" type="number" min="5" max="900" value="60" required></label><label>CPU 上限（%）<input id="execution-cpu" type="number" min="1" max="25" value="20" required></label><label>内存上限（MB）<input id="execution-memory" type="number" min="128" max="4096" value="2048" required></label></div><label class="execution-checkbox"><input id="execution-idle" type="checkbox" checked>仅在电脑空闲时启动；开始使用电脑时停止</label></details></div><label id="execution-address-label" hidden>测试网公开收款地址<input id="execution-address" type="text" autocomplete="off" placeholder="Te…（公开地址）"></label><div id="execution-quote"></div></form><footer class="execution-dialog-actions"><button type="button" class="button primary" id="execution-start" disabled>正在读取方案…</button></footer></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

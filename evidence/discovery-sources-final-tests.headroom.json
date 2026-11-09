@@ -1,0 +1,15 @@
+{
+  "source": "discovery-sources-final-tests.log",
+  "original_lines": 264,
+  "compressed_lines": 7,
+  "tokens_saved_estimate": 10105,
+  "compression_ratio": 0.011783976725423563,
+  "stats": {
+    "errors": 0,
+    "fails": 0,
+    "info": 0,
+    "selected": 7,
+    "total": 264,
+    "warnings": 0
+  }
+}

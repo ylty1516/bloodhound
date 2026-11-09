@@ -1,0 +1,23 @@
+{
+  "id": "unmineable-usdt-bsc-vm-cpu",
+  "status": "scoped_review_pass",
+  "reviewed_at": "2026-11-09",
+  "version": "6.26.0",
+  "linux_archive_sha256": "fc6f8ae5f64e4f17481f7e3be29a1c56949f216a998414188003eae1db20c9e5",
+  "linux_executable_sha256": "b20f39fc00d242e706b6c30367ad811c676e0575050a4ec2f30104b696944b49",
+  "base_sha256": "406630c08b5e545fcc7209854b129d47e3af822db128c9f19336593b5a2d3fe0",
+  "scope": "Same authorized mining project, payout address, 2 threads, CPU<=20%, process-group memory<=3072MB and cumulative single-run duration<=900s. Linux execution is isolated in an owned QEMU/WHPX VM, guest RAM2816MiB, with no host folder/clipboard sharing and restricted guest network. No new funds, signing, daily schedule or security-setting changes.",
+  "checks": [
+    "Official pinned XMRig6.26 Linux release asset hash; extracted ELF independently hashed. Same scoped RandomX/CPU/pool/donation source review as the Windows route; this is not a full binary audit.",
+    "Copied and verified all364 hash-listed local vendor runtime files; did not modify another project or reuse its guest disk, seed, SSH key or wallet. This turn did not independently repeat each MSYS2 package signature verification.",
+    "Rehashed public Ubuntu24.04 minimal base image and matched publisher HTTPS SHA256SUMS for release20261105. Prior image-verification recorded a valid Ubuntu signature; this turn repeated the image hash and official checksum comparison.",
+    "Cloud-init seed contains only a newly generated public SSH key and OS settings. Private SSH key and authenticated miner-API configuration stay outside the save library. Guest never receives wallet credentials.",
+    "QEMU guest egress disabled. Host opens a fixed upstream rx.unmineable.com:443 gateway; SSH forwards only that pool and authenticated loopback miner status. No arbitrary caller-provided endpoints or commands.",
+    "Actual OS/SSH preflight returned prospect and x86_64 before any miner upload. All processes inherit the assigned Windows resource Job; stopping kills the VM and descendants."
+  ],
+  "limitations": [
+    "Virtualization adds a boundary but does not guarantee absence of hypervisor, OS or miner vulnerabilities.",
+    "Pool SSL uses a first-use certificate pin, not independent CA authentication. User explicitly acknowledged this within the original mining authorization.",
+    "Tradability is verified; positive net profit is not promised. Accepted shares, custodial pool credit and actual chain receipt remain different outcomes."
+  ]
+}

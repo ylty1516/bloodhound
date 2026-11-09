@@ -1,0 +1,714 @@
+{
+  "schema_version": 1,
+  "plan_version": 1,
+  "created_date": "2026-11-09",
+  "plan_status": "ready_for_execution",
+  "current_task": null,
+  "next_task": "FIND-03",
+  "plan_document": "docs/DELIVERY_EXECUTION_PLAN.md",
+  "original_plan": "EXECUTION_PLAN.md",
+  "original_acceptance": "ACCEPTANCE.md",
+  "baseline_evidence": "evidence/delivery-readiness-audit-20261109.json",
+  "runtime_changed_by_planning": false,
+  "product_acceptance_unchanged": true,
+  "development_mode": "one primary task; independent work may continue while waiting for external conditions",
+  "status_values": [
+    "planned",
+    "in_progress",
+    "implemented",
+    "verified",
+    "waiting_external"
+  ],
+  "verified_requires": [
+    "completed exit criteria",
+    "passing applicable checks",
+    "traceable evidence",
+    "updated STATUS.md and task board"
+  ],
+  "discovery_invariants": [
+    "announced mining and mainnet not started",
+    "CPU before GPU",
+    "unknowns remain explicit",
+    "Binance/trading/hardware/safety are annotations for discovery, not admission gates",
+    "todos and reports never authorize execution"
+  ],
+  "metric_owners": {
+    "Q1": [
+      "QA-01"
+    ],
+    "Q2": [
+      "QA-01",
+      "SHIP-01"
+    ],
+    "Q3": [
+      "QA-01"
+    ],
+    "Q4": [
+      "QA-01",
+      "PKG-01"
+    ],
+    "Q5": [
+      "QA-01",
+      "PKG-01"
+    ],
+    "Q6": [
+      "QA-01"
+    ],
+    "Q7": [
+      "OBS-01"
+    ],
+    "Q8": [
+      "QA-01",
+      "HOST-01",
+      "PKG-01"
+    ]
+  },
+  "natural_time_gates": {
+    "OBS-01": "168 natural hours and at least 95% planned check success; preserve gaps",
+    "RUN-02": "at least three actual daily cycles under concrete daily authorization"
+  },
+  "tasks": [
+    {
+      "id": "PLAN-00",
+      "title": "冻结开发基线、迁移备份与验收指标",
+      "depends_on": [],
+      "acceptance_refs": [
+        "A01",
+        "A02",
+        "A03"
+      ],
+      "metric_refs": [],
+      "exit_criteria": [
+        "核对旧数据、模型和来源偏好",
+        "记录配置版本及指标计量方法",
+        "备份与恢复核对"
+      ],
+      "status": "verified",
+      "evidence": [
+        "evidence/delivery-baseline.json"
+      ],
+      "block_reason": null,
+      "started_at": "2026-11-09T07:39:08.055065+00:00",
+      "verified_at": "2026-11-09T07:49:07.983466+00:00"
+    },
+    {
+      "id": "FIND-01",
+      "title": "全量线索、状态、理由与查看入口",
+      "depends_on": [
+        "PLAN-00"
+      ],
+      "acceptance_refs": [
+        "A05",
+        "A06",
+        "A13"
+      ],
+      "metric_refs": [
+        "Q1"
+      ],
+      "exit_criteria": [
+        "72条线索及ID无损可查",
+        "历史未知不伪造排除理由",
+        "分页、筛选、详情接通"
+      ],
+      "status": "verified",
+      "evidence": [
+        "evidence/lead-catalogue-release-tests.log",
+        "evidence/lead-catalogue-runtime.json",
+        "evidence/lead-catalogue-ui-qa.json",
+        "evidence/lead-catalogue-four-adapters.json"
+      ],
+      "block_reason": null,
+      "started_at": "2026-11-09T07:49:07.983466+00:00",
+      "verified_at": "2026-11-09T08:28:18.981800+00:00",
+      "verification_notes": "Full catalogue, reasons, pagination, filters and legacy details verified. Final mobile DOM verified; updated mobile screenshot unavailable, visual follow-up retained for FIND-07."
+    },
+    {
+      "id": "FIND-02",
+      "title": "通用来源接入与健康恢复",
+      "depends_on": [
+        "PLAN-00"
+      ],
+      "acceptance_refs": [
+        "A05",
+        "A07",
+        "A09"
+      ],
+      "metric_refs": [
+        "Q2"
+      ],
+      "exit_criteria": [
+        "现场核实来源URL与合法访问方式",
+        "两种通用发现机制真实成功",
+        "失败源明确覆盖缺口与恢复策略"
+      ],
+      "status": "verified",
+      "evidence": [
+        "evidence/discovery-sources-final-tests.log",
+        "evidence/forum-source-repaired-probes.json",
+        "evidence/discovery-github-probe.json",
+        "evidence/discovery-source-live-upgrade.json",
+        "evidence/discovery-sources-ui-qa.json"
+      ],
+      "block_reason": null,
+      "started_at": "2026-11-09T08:28:18.981800+00:00",
+      "verified_at": "2026-11-09T09:08:18.374370+00:00",
+      "verification_notes": "Windows existing proxy respected; disabled official XML replaced by public forum listings. Two general mechanisms read successfully. Scope remains bounded listings; full discovery quality not signed off."
+    },
+    {
+      "id": "FIND-03",
+      "title": "游标、分页、补抓与证据时效",
+      "depends_on": [
+        "FIND-01",
+        "FIND-02"
+      ],
+      "acceptance_refs": [
+        "A05",
+        "A07",
+        "A09"
+      ],
+      "metric_refs": [
+        "Q1",
+        "Q3",
+        "Q5"
+      ],
+      "exit_criteria": [
+        "分页和断档补抓真实接通",
+        "失败不前移成功游标",
+        "来源心跳不冒充条目或Agent复核"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "FIND-04",
+      "title": "身份、官方证据与开挖状态核验",
+      "depends_on": [
+        "FIND-01",
+        "FIND-03"
+      ],
+      "acceptance_refs": [
+        "A05",
+        "A06"
+      ],
+      "metric_refs": [
+        "Q1",
+        "Q2"
+      ],
+      "exit_criteria": [
+        "未开挖与未上市、测试网分开",
+        "身份和日期冲突保留未知",
+        "公告先入重点待办、CPU优先"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "FIND-05",
+      "title": "事件驱动的自动Agent研究队列",
+      "depends_on": [
+        "FIND-04"
+      ],
+      "acceptance_refs": [
+        "A04",
+        "A05",
+        "A07"
+      ],
+      "metric_refs": [
+        "Q3",
+        "Q5",
+        "Q6",
+        "Q8"
+      ],
+      "exit_criteria": [
+        "新证据去重派发并显示实际阶段",
+        "预算不足或宿主缺失保留排队",
+        "同租约格式修正和已知用量保留"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "FIND-06",
+      "title": "持久通知、投递与临近提醒",
+      "depends_on": [
+        "FIND-05"
+      ],
+      "acceptance_refs": [
+        "A05",
+        "A13"
+      ],
+      "metric_refs": [
+        "Q3",
+        "Q5"
+      ],
+      "exit_criteria": [
+        "页面关闭时本机通知实测",
+        "通知队列重试与事件ID去重",
+        "日期冲突不编造倒计时"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "FIND-07",
+      "title": "CLI与Web完整发现流程",
+      "depends_on": [
+        "FIND-01",
+        "FIND-05",
+        "FIND-06"
+      ],
+      "acceptance_refs": [
+        "A13"
+      ],
+      "metric_refs": [
+        "Q3",
+        "Q4"
+      ],
+      "exit_criteria": [
+        "线索到核验到待办到提醒可操作",
+        "检查与项目运行分开",
+        "桌面、390px、键盘、重连核验"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "OBS-00",
+      "title": "新观察记录、冻结范围与日报",
+      "depends_on": [
+        "FIND-03",
+        "FIND-06"
+      ],
+      "acceptance_refs": [
+        "A09"
+      ],
+      "metric_refs": [
+        "Q7"
+      ],
+      "exit_criteria": [
+        "旧暂停观察与新run_id隔离",
+        "失败及离线缺口保留",
+        "准备不自动启动观察计时"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "QA-01",
+      "title": "发现样本、真实抓取与故障成本验证",
+      "depends_on": [
+        "FIND-07",
+        "OBS-00"
+      ],
+      "acceptance_refs": [
+        "A03",
+        "A05",
+        "A06",
+        "A07",
+        "A13"
+      ],
+      "metric_refs": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q8"
+      ],
+      "exit_criteria": [
+        "30标注案例中至少20条可追溯真实资料",
+        "真实来源及技术通知链路通过，未预置新公告可在观察中补实证",
+        "本地协议、性能、用量计量与故障证据齐全；不提前签收最终外部结果"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "HOST-01",
+      "title": "四宿主原生端到端及恢复验收",
+      "depends_on": [
+        "FIND-05",
+        "FIND-06"
+      ],
+      "acceptance_refs": [
+        "A03",
+        "A04"
+      ],
+      "metric_refs": [
+        "Q8"
+      ],
+      "exit_criteria": [
+        "真实完整宿主和模型检查逐端核对",
+        "版本、首次信任、领取、进度、修正、取消、恢复",
+        "缺宿主保持未验收而非用SDK冒充"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "PKG-01",
+      "title": "安装升级、迁移导出与回滚",
+      "depends_on": [
+        "FIND-07"
+      ],
+      "acceptance_refs": [
+        "A03",
+        "A04",
+        "A11",
+        "A13"
+      ],
+      "metric_refs": [
+        "Q4",
+        "Q5",
+        "Q8"
+      ],
+      "exit_criteria": [
+        "独立目录安装与更新",
+        "私有备份恢复、无关配置保留",
+        "停止卸载与秘密隔离核验"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "OBS-01",
+      "title": "当前范围的168小时只读观察",
+      "depends_on": [
+        "QA-01",
+        "OBS-00"
+      ],
+      "acceptance_refs": [
+        "A07",
+        "A09"
+      ],
+      "metric_refs": [
+        "Q7"
+      ],
+      "exit_criteria": [
+        "具体观察范围和开始时间记录",
+        "168自然小时及至少95%计划检查成功率",
+        "日报与独立抽查，不混用旧暂停记录"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "SHIP-01",
+      "title": "发现模块范围签收",
+      "depends_on": [
+        "QA-01",
+        "OBS-01",
+        "HOST-01",
+        "PKG-01"
+      ],
+      "acceptance_refs": [
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A09",
+        "A13"
+      ],
+      "metric_refs": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q7",
+        "Q8"
+      ],
+      "exit_criteria": [
+        "覆盖范围、真实新发现与通知实证齐全",
+        "四端及安装门槛齐全",
+        "模块验收不冒充整体发布"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "RUN-00",
+      "title": "项目运行适配、成果探针及每日调度开发",
+      "depends_on": [
+        "QA-01"
+      ],
+      "acceptance_refs": [
+        "A08",
+        "A10",
+        "A11",
+        "A12"
+      ],
+      "metric_refs": [
+        "Q5",
+        "Q8"
+      ],
+      "exit_criteria": [
+        "固定版本配方不接受模型任意命令",
+        "成果、资源、互斥、停止与调度先隔离验证",
+        "仅开发，不启动新项目或每日任务"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "RUN-01",
+      "title": "一个CPU项目的授权真实运行",
+      "depends_on": [
+        "RUN-00",
+        "OBS-01"
+      ],
+      "acceptance_refs": [
+        "A08",
+        "A10",
+        "A11"
+      ],
+      "metric_refs": [],
+      "exit_criteria": [
+        "项目开放、固定版本审阅及具体授权",
+        "真实贡献回执独立核对",
+        "承诺资产到账时必须有到账证据"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "RUN-02",
+      "title": "三个真实每日运行周期",
+      "depends_on": [
+        "RUN-01"
+      ],
+      "acceptance_refs": [
+        "A11",
+        "A12"
+      ],
+      "metric_refs": [],
+      "exit_criteria": [
+        "每日具体范围另行记录",
+        "至少三个真实周期及故障恢复证据",
+        "暂停不复活、不重叠、不重复领取付款"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "RUN-03",
+      "title": "三类项目路线实际验证",
+      "depends_on": [
+        "RUN-01"
+      ],
+      "acceptance_refs": [
+        "A14"
+      ],
+      "metric_refs": [],
+      "exit_criteria": [
+        "挖矿、节点或算力、测试网或任务各一条",
+        "CPU优先，GPU后续",
+        "积分、贡献、测试币与资产到账分开"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "SHIP-02",
+      "title": "原门槛整体v0.1验收",
+      "depends_on": [
+        "SHIP-01",
+        "RUN-02"
+      ],
+      "acceptance_refs": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "A13"
+      ],
+      "metric_refs": [],
+      "exit_criteria": [
+        "原A01至A13全部通过",
+        "单轮、每日与交付定义不降低",
+        "安装恢复、限制与后台任务交接齐全"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    },
+    {
+      "id": "SHIP-03",
+      "title": "原企划v1最终验收",
+      "depends_on": [
+        "SHIP-02",
+        "RUN-03"
+      ],
+      "acceptance_refs": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A15"
+      ],
+      "metric_refs": [],
+      "exit_criteria": [
+        "原A01至A15全部通过",
+        "最终四宿主回归",
+        "三类真实路线实证齐全"
+      ],
+      "status": "planned",
+      "evidence": [],
+      "block_reason": null,
+      "started_at": null,
+      "verified_at": null
+    }
+  ],
+  "metric_results": {
+    "Q1": {
+      "status": "partial",
+      "evidence": [
+        "evidence/lead-catalogue-unit-tests.log",
+        "evidence/lead-catalogue-runtime.json"
+      ],
+      "owners": [
+        "QA-01"
+      ]
+    },
+    "Q2": {
+      "status": "partial",
+      "evidence": [
+        "evidence/discovery-github-probe.json",
+        "evidence/discovery-source-live-upgrade.json"
+      ],
+      "owners": [
+        "QA-01",
+        "SHIP-01"
+      ],
+      "remaining": "Bounded source mechanisms verified; official identity, full automatic Agent-to-notification evidence and recall corpus remain pending."
+    },
+    "Q3": {
+      "status": "not_run",
+      "evidence": [],
+      "owners": [
+        "QA-01"
+      ]
+    },
+    "Q4": {
+      "status": "partial",
+      "evidence": [
+        "evidence/lead-catalogue-api-latency.json",
+        "evidence/lead-catalogue-ui-qa.json",
+        "evidence/check-poll-latency-after.json"
+      ],
+      "owners": [
+        "QA-01",
+        "PKG-01"
+      ],
+      "remaining": "Measured hot endpoints meet 500ms on tested samples. Cold startup, whole-flow latency and final mobile visual capture remain unverified."
+    },
+    "Q5": {
+      "status": "partial",
+      "evidence": [
+        "evidence/lead-catalogue-release-tests.log"
+      ],
+      "owners": [
+        "QA-01",
+        "PKG-01"
+      ]
+    },
+    "Q6": {
+      "status": "not_run",
+      "evidence": [],
+      "owners": [
+        "QA-01"
+      ]
+    },
+    "Q7": {
+      "status": "not_run",
+      "evidence": [],
+      "owners": [
+        "OBS-01"
+      ]
+    },
+    "Q8": {
+      "status": "partial",
+      "evidence": [
+        "evidence/lead-catalogue-four-adapters.json"
+      ],
+      "owners": [
+        "QA-01",
+        "HOST-01",
+        "PKG-01"
+      ]
+    }
+  },
+  "late_evidence": {
+    "new_non_preseeded_project": "May be collected during OBS-01; required before SHIP-01. Replay never substitutes for live discovery.",
+    "host_runtime": "Missing host does not prevent independent tasks, but required before the corresponding release gate.",
+    "low_token_measurement": "Unknown usage remains unknown; final cost target is not passed by protocol-only tests."
+  }
+}

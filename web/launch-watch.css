@@ -1,0 +1,25 @@
+.watch-policy{display:flex;align-items:flex-start;gap:18px;margin:8px 0 30px;max-width:850px}
+.watch-policy h2{font-size:clamp(22px,2.2vw,30px);line-height:1.5;margin:0 0 8px;font-weight:600;letter-spacing:-.025em}
+.watch-policy p,.watch-note{line-height:1.8;color:var(--muted,#b4beb6);margin:0}
+.watch-star{color:#d7c59d;font-size:32px;line-height:1.5}
+.watch-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #3b443e;padding:0 0 20px}
+.watch-toolbar p{font-size:12px;color:var(--muted,#b4beb6);margin:0;line-height:1.8}
+.watch-toolbar>div{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.watch-toolbar select{max-width:180px}
+.watch-row{padding:26px 0 26px 21px;border-bottom:1px solid #343e37;position:relative;overflow-wrap:anywhere}
+.watch-row.is-important::before{content:"";position:absolute;top:30px;bottom:30px;left:0;width:3px;border-radius:3px;background:#c9bd96}
+.watch-tags{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:11px}
+.watch-important{color:#e0cfa6;letter-spacing:.07em}
+.watch-row h2{font-size:23px;line-height:1.5;letter-spacing:-.02em;margin:13px 0 7px}
+.watch-date{font-size:14px;color:#d0d9cb;margin:0 0 9px;line-height:1.8}
+.watch-quiet{color:#a8b3aa;font-size:12px;line-height:1.8}
+.watch-actions{display:flex;align-items:center;flex-wrap:wrap;gap:17px;margin-top:18px}
+.watch-actions .button{font-size:12px;min-height:36px;padding:8px 13px}
+.watch-empty{padding:44px 8px;color:#b8c2b9;line-height:1.9}
+.watch-empty h2{font-size:20px;color:#dce2d7}
+.watch-entry{border:1px solid #525646;border-radius:14px;background:#252e27;margin:0 0 24px}
+.watch-entry-link{display:flex;justify-content:space-between;gap:16px;align-items:center;text-decoration:none;color:inherit;padding:18px 22px}
+.watch-entry-link strong{font-size:15px;color:#ded6b9;font-weight:600}
+.watch-entry-link p{font-size:12px;color:#b7c3b8;margin:6px 0 0;line-height:1.7}
+.watch-entry-action{font-size:12px;color:#c0d2b4;white-space:nowrap}
+@media(max-width:700px){.watch-policy{gap:12px;margin-bottom:22px}.watch-policy h2{font-size:23px}.watch-policy p{font-size:13px}.watch-toolbar{align-items:flex-start;flex-direction:column;gap:12px}.watch-toolbar>div{width:100%;justify-content:space-between}.watch-toolbar select{max-width:160px}.watch-row{padding-left:15px}.watch-row h2{font-size:21px}.watch-actions{gap:12px}.watch-entry-link{padding:16px;align-items:flex-start;flex-direction:column;gap:10px}.watch-entry-action{align-self:flex-end}}

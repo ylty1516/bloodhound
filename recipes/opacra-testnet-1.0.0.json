@@ -1,0 +1,53 @@
+{
+  "id": "opacra-testnet",
+  "version": "1.0.0",
+  "candidate_url": "https://opacra.org/",
+  "candidate_identity": "opacra:testnet3",
+  "name": "Opacra testnet 3 · Windows 准备路线",
+  "network": "testnet",
+  "artifact": {
+    "url": "https://github.com/opacra/opacra/releases/download/v1.0.0/opacra-v1.0.0-win-x64.zip",
+    "sha256": "5a7697cdb8f9084621b65b5b7d7c78c4e30e1f3cbebaa7954c93feb8369c09a9",
+    "version": "1.0.0",
+    "locally_verified": true
+  },
+  "steps": [
+    {
+      "action": "preflight",
+      "description": "复核 testnet 3 是否仍开放、官方版本、Windows 支持与个人预算。",
+      "verification": "实际硬件、最低资源和日成本有依据；网络明确为 testnet。"
+    },
+    {
+      "action": "prepare",
+      "description": "规划独立运行目录、发布包哈希核对、发布签名审阅与配置隔离。",
+      "verification": "模拟校验成功；本阶段不下载、不执行发布包，不创建钱包。"
+    },
+    {
+      "action": "run",
+      "description": "规划限定 CPU 的测试网节点与矿工启动、健康检查及退出。",
+      "verification": "模拟节点版本、网络类型、同步高度与受限资源；真实限额执行器尚未实现。"
+    },
+    {
+      "action": "verify",
+      "description": "规划核对本机 accepted blocks／贡献记录，与测试网浏览器交叉验证。",
+      "verification": "模拟回执明确标记，不将健康进程或哈希率直接当作已获得奖励。"
+    },
+    {
+      "action": "deliver",
+      "description": "生成测试网贡献回执与运行摘要的模拟交付物。",
+      "verification": "测试币没有现金价值、不会转换为主网币；不进行转账、领取或签名。"
+    }
+  ],
+  "evidence": [
+    "https://opacra.org/",
+    "https://github.com/opacra/opacra",
+    "https://github.com/opacra/opacra/releases/download/v1.0.0/SHA256SUMS-v1.0.0.asc"
+  ],
+  "limitations": [
+    "发布包已下载并通过本机 SHA-256 校验；尚未验证发布签名或完成项目代码安全审计，也未实际启动节点或矿工。",
+    "官网称 Windows 二进制未签名、尚无专业安全审计；不关闭系统安全保护或自动越过警告。",
+    "最低内存、存储、实际电费和用户技能仍需证据；未填数值不能推定为零。",
+    "官网公告计划于2026-11-08 14:00 UTC主网上线，属于未来计划；本配方仅针对当前测试网，不会自动切换主网。"
+  ],
+  "delivery": "仅准备测试网贡献记录与运行摘要；真实执行、奖励或交付尚未发生。"
+}
