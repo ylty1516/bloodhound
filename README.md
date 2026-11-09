@@ -1,6 +1,6 @@
 # 寻血猎犬 · Bloodhound
 
-CPU优先的加密项目发现与Agent协作工作台，开发代号 **Prospect**。仓库使用英文路径`bloodhound`；现有Python包、CLI命令和宿主插件标识保留`prospect`。
+CPU优先的加密项目发现与Agent协作工作台，开发代号 **Prospect**。GitHub 仓库为 [ylty1516/bloodhound](https://github.com/ylty1516/bloodhound)；现有Python包、CLI命令和宿主插件标识保留`prospect`。
 
 ![全部线索界面](evidence/discovery-sources-desktop.png)
 
